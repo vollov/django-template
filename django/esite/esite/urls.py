@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     
     url(r'^page/', include('page.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    #url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 )
 
 if not settings.DEBUG:
