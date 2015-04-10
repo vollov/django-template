@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'page',
     'registration',
     'photo',
+    'auto',
 )
 
 MIDDLEWARE_CLASSES = (

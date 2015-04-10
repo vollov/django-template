@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Image(models.Model):
     title = models.CharField(max_length=60, blank=True, null=True)
     image = models.FileField(upload_to="images/")
