@@ -36,10 +36,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'page',
-    'registration',
-    'photo',
-    'auto',
+    'captcha',
+    'crispy_forms',
+    'account',
+    #'page',
+    #'registration',
+    #'photo',
+    #'auto',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,7 +66,7 @@ WSGI_APPLICATION = 'esite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'esite',
+        'NAME': 'django_template',
         'USER': 'root',
         'PASSWORD': 'justdoit', 
         'HOST': 'localhost', 
@@ -83,11 +86,69 @@ USE_L10N = True
 
 USE_TZ = True
 
+# define resource root
+RESOURCE_ROOT='/opt/www/django-template/'
+#RESOURCE_ROOT='c:/opt/var/www/sm/'
+# Logging settings for development
+"""
+DEBUG: Low level system information for debugging purposes
+INFO: General system information
+WARNING: Information describing a minor problem that has occurred.
+ERROR: Information describing a major problem that has occurred.
+CRITICAL: Information describing a critical problem that has occurred.
+"""
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '[ %(levelname)s ] %(asctime)s - %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'images.logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(RESOURCE_ROOT,'logs/debug.log'),
+            'formatter': 'simple',
+        },
+        'requests.logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(RESOURCE_ROOT,'logs/requests.log'),
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'image': {
+            'handlers': ['images.logfile', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['requests.logfile'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+# variable for production
+STATIC_ROOT=  os.path.join(RESOURCE_ROOT,'static')
+
+#variables for developement
 STATIC_PATH = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS = (
     STATIC_PATH,
@@ -95,39 +156,13 @@ STATICFILES_DIRS = (
 
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
     TEMPLATE_PATH,
 )
 
 MEDIA_URL = '/media/'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_ROOT = '/home/dustin/media/esite'
+MEDIA_ROOT = os.path.join(RESOURCE_ROOT,'media')
 
-LOG_DIR = os.path.join(BASE_DIR, 'logs')
-LOG_PATH = os.path.join(LOG_DIR, 'debug.log')
-
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': LOG_PATH,
-        },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
-
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 REGISTRATION_OPEN = True                # If True, users can register
 ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of course, use a different value.
