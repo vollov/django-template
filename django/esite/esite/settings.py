@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'captcha',
     'crispy_forms',
     'account',
+    'customer',
     #'page',
     #'registration',
     #'photo',

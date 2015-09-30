@@ -3,7 +3,9 @@ from django.http import HttpResponse
 def index(request):
     return HttpResponse("Rango says hey there world!")
 
-from rango.forms import UserForm
+from account.forms import UserForm
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
 
 def register(request):
 
@@ -41,8 +43,9 @@ def register(request):
     else:
         user_form = UserForm()
         
+    requestContext = RequestContext(request, {'user_form': user_form, 'registered': registered} )
 
     # Render the template depending on the context.
-    return render(request,
-            'account/register.html',
-            {'user_form': user_form, 'registered': registered} )
+    return render_to_response('register.html', requestContext)
+    
+    

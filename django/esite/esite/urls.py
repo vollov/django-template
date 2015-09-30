@@ -25,7 +25,7 @@ import esite
 urlpatterns = [
     url(r'^$', views.index, name='home'),
     #url(r'^page/', include(page.urls)),
-    #url(r'^member/', include(member.urls)),
+    url(r'^account/', include('account.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^captcha/', include('captcha.urls')),
 ]
