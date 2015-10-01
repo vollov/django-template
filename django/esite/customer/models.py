@@ -10,6 +10,7 @@ class Customer(models.Model):
     sin = models.CharField(max_length=24, blank=True, null=True)
     address = models.CharField(max_length=125, blank=True, null=True)
     phone = models.CharField(max_length=10, blank=True, null=True)
+    active = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.name

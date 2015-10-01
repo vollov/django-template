@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', views.index, name='home'),
     #url(r'^page/', include(page.urls)),
     url(r'^account/', include('account.urls')),
+    url(r'^customer/', include('customer.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^captcha/', include('captcha.urls')),
 ]

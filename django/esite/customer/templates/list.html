@@ -1,0 +1,27 @@
+
+
+{% if customers %}
+		        
+<ul class="list-group">
+	{% for customer in customers %}
+		<li class="list-group-item">
+			<div class="row">
+				<div class="col-xs-6 col-md-3">
+				{{customer.name}}
+				</div>
+				<div class="col-xs-6 col-md-3">
+				{{customer.email}}
+				</div>
+				<div class="col-xs-6 col-md-3">
+				{{customer.sin}}
+				</div>
+				<div class="col-xs-6 col-md-3">
+				{{customer.phone}}
+				</div>
+			</div>
+		</li>
+  	{% endfor %}
+</ul>
+{% else %}
+    <p>There are no customers.</p>
+{% endif %}	
